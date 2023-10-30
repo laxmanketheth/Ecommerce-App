@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import Navbar from '../components/Navbar'
-import Announcement from '../components/Announcement'
+import Announcement from '../components/Announcement';
+// import Products from '../components/Products';
 import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
 import AddSharpIcon from '@mui/icons-material/AddSharp'
 import RemoveSharpIcon from '@mui/icons-material/RemoveSharp';
 import mobile from '../responsive'
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { publicRequest } from '../requestMethods';
-import { addProduct } from '../redux/cartRedux'
-import { useDispatch } from 'react-redux'
+import { addProduct } from '../redux/cartRedux';
+import { useDispatch } from 'react-redux';
+import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 
 const Container = styled.div``
 
@@ -22,7 +24,18 @@ const Wrapper = styled.div`
     flexDirection: "column",
     margin: "0px"
 })}
-    `
+    `;
+
+const TopButton = styled.button`
+    margin: 20px 0px 0px 4px ;
+    padding: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: black;
+    color: wheat;
+    /* border: 1px solid red ; */
+    `;
+
 const ImgContainer = styled.div`
     /* border: 2px solid blue; */
     width: 100%;
@@ -143,7 +156,7 @@ const Button = styled.button`
 const Product = () => {
 
     const location = useLocation() //this hook gives us various properties including
-                                 // the pathname property that represents the current URL path
+    // the pathname property that represents the current URL path
     const id = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
     // console.log(product);
@@ -161,12 +174,12 @@ const Product = () => {
                 // console.log(res.data)               
             } catch { }
         };
-        getProduct()      
+        getProduct()
     }, [id]);
     // console.log(product);
 
     const decrease = () => {
-        quantity >1 && setQuantity(quantity - 1)
+        quantity > 1 && setQuantity(quantity - 1)
         //we have kept a condition here so that the quantity of products doesnt go in negative
     };
 
@@ -178,61 +191,67 @@ const Product = () => {
     const handleClick = () => {
         // console.log("addproduct")
         dispatch(
-           
+
             addProduct({ ...product, quantity, color, size })
         )
         // console.log(quantity);
     };
-   
+
 
     return (
         <Container>
 
             <Navbar />
             <Announcement />
+            <>
+                <Link to='/'>
+                    <ReplyAllIcon style={{marginLeft:'40px', color:'black'}}/>
+                    <TopButton>Back to Home Page</TopButton>
+                </Link>
 
-            <Wrapper>
-                <ImgContainer>
-                    <Image src={product.img} />
-                </ImgContainer>
+                <Wrapper>
+                    <ImgContainer>
+                        <Image src={product.img} />
+                    </ImgContainer>
 
-                <InfoContainer>
-                    <Title>{product.title}</Title>
-                    <Text> {product.desc}
-                    </Text>
-                    <Price>$ {product.price}</Price>
+                    <InfoContainer>
+                        <Title>{product.title}</Title>
+                        <Text> {product.desc}
+                        </Text>
+                        <Price>$ {product.price}</Price>
 
-                    <FilterContainer>
-                        <Filter>
-                            <FilterTitle>Color</FilterTitle>
-                            {product.color && product.color.map((c) => (
-                                        <FilterColor color={c} key={c} onClick={() =>setColor(c) } />
-                                ))}                           
-                        </Filter>
+                        <FilterContainer>
+                            <Filter>
+                                <FilterTitle>Color</FilterTitle>
+                                {product.color && product.color.map((c) => (
+                                    <FilterColor color={c} key={c} onClick={() => setColor(c)} />
+                                ))}
+                            </Filter>
 
-                        <Filter>
-                            <FilterTitle>Size</FilterTitle>
-                            <FilterSize onChange={(e) => setSize(e.target.value)}>
-                            {product.size && product.size.map((s) => (
+                            <Filter>
+                                <FilterTitle>Size</FilterTitle>
+                                <FilterSize onChange={(e) => setSize(e.target.value)}>
+                                    {product.size && product.size.map((s) => (
                                         <SizeOption key={s}>{s}</SizeOption>
-                                ))}                    
-                            </FilterSize>
-                        </Filter>
-                    </FilterContainer>
+                                    ))}
+                                </FilterSize>
+                            </Filter>
+                        </FilterContainer>
 
-                    <AddContainer>
-                        <AmountContainer>
-                            {/* <StyledRemoveSharpIcon  onClick={()=> handleQuantity("dec")} /> */}
-                            <StyledRemoveSharpIcon onClick={decrease} />
-                            <Amount>{quantity}</Amount>
-                            {/* <StyledAddSharpIcon  onClick={()=> handleQuantity("inc")} /> */}
-                            <StyledAddSharpIcon onClick={increase} />
-                        </AmountContainer>
-                        <Button onClick={handleClick}> ADD TO CART</Button>
-                    </AddContainer>
-                </InfoContainer>
-            </Wrapper>
-
+                        <AddContainer>
+                            <AmountContainer>
+                                {/* <StyledRemoveSharpIcon  onClick={()=> handleQuantity("dec")} /> */}
+                                <StyledRemoveSharpIcon onClick={decrease} />
+                                <Amount>{quantity}</Amount>
+                                {/* <StyledAddSharpIcon  onClick={()=> handleQuantity("inc")} /> */}
+                                <StyledAddSharpIcon onClick={increase} />
+                            </AmountContainer>
+                            <Button onClick={handleClick}> ADD TO CART</Button>
+                        </AddContainer>
+                    </InfoContainer>
+                </Wrapper>
+            </>
+            {/* <Products/> */}
             <Newsletter />
             <Footer />
 

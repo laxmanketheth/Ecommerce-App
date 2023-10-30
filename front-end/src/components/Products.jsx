@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
-import { popularProducts } from '../data'
 import Product from './Product'
 import mobile from '../responsive';
 import axios from "axios";
@@ -21,7 +20,7 @@ const Container = styled.div`
 
 
 const Products = ({cat, filters, sort}) => {
-  // receiving above props from ProductList
+  // receiving above props from ProductsList in pages folder
   // console.log(cat,filters,sort);
 
   const [products, setProducts] = useState([]);
@@ -78,7 +77,7 @@ const Products = ({cat, filters, sort}) => {
         : products
               .slice(0, 8)
               .map((item)=> <Product item = {item} key={item.id}/>)
-   }
+      }
     </Container>
   );
 };

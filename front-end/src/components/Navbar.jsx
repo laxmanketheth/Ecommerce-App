@@ -93,12 +93,19 @@ const Center = styled.div`
 const LogoDiv = styled.div`
     width: 150px;
     ${mobile({ width: "100px" })}
-`
+`;
 
 const Logo = styled.h1`
     font-weight: bold;
     cursor: pointer;
-`
+    letter-spacing: 3px;
+    color: #ecdfc8;
+    /* font-size: 40px; */
+`;
+
+const LogoLink = styled(Link)`
+  text-decoration: none;  
+`;
 
 const Right = styled.div`
     flex: 1;
@@ -112,7 +119,8 @@ const Right = styled.div`
     fontSize: "10px",
     justifyContent: "start"
 })}
-`
+`;
+
 const Register = styled.span`
     font-size: 14px;
     cursor: pointer;
@@ -172,9 +180,9 @@ const Navbar = () => {
                 </Left>
 
                 <Center>
-                    <Link to="/">
+                    <LogoLink to="/">
                         <LogoDiv><Logo>LUXE.</Logo></LogoDiv>
-                    </Link>
+                    </LogoLink>
                 </Center>
 
                 <Right>

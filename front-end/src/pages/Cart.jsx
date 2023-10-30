@@ -30,11 +30,13 @@ const Wrapper = styled.div`
 const Title = styled.h2`
     font-weight: 300;
     text-align: center;
+    font-weight: bold;
+    /* border: 1px solid red; */
     `
 const Top = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 20px ;
     ${mobile({
     // border :"1px solid",
@@ -45,20 +47,27 @@ const TopButton = styled.button`
     padding: 6px;
     font-weight: 600;
     cursor: pointer;
-    background-color: ${props => props.type ? "black" : "white"};
-    color: ${props => props.type === "filled" && "white"};
-    border: ${props => props.type === "filled" && "none"};
-    `
+    background-color: black;
+    color: wheat;
+    /* border: 1px solid red ; */
+    `;
 const TopTexts = styled.div`
+    /* border: 2px solid; */
+    background-color: black;
+    font-weight: 600;
+    padding: 3px;
+    color: wheat;
      ${mobile({
     display: "none"
 })}
-    `
+    `;
 
 const TopText = styled.span`
-    text-decoration:underline;
-    cursor: pointer;
+    font-size: 20px;
+    /* cursor: pointer; */
     margin: 0 10px;
+    letter-spacing: 1px;
+   
     `
 const Bottom = styled.div`
     display: flex;
@@ -72,7 +81,13 @@ const Bottom = styled.div`
 const Info = styled.div`
     flex: 3;
     /* border: 1px solid; */
-    `
+    `;
+
+const ProductLink = styled(Link)`
+  text-decoration: none ;
+  color: black;
+  /* font-weight: bold; */
+`;
 
 const Product = styled.div`
    display: flex;
@@ -136,6 +151,7 @@ const ProductAmountContainer = styled.div`
     `
 const ProductAmount = styled.div`
     font-size: 24px;
+    /* font-weight: 600; */
     margin: 3px;
     `
 const ProductPrice = styled.div`
@@ -150,11 +166,12 @@ const Hr = styled.hr`
 
 const Summary = styled.div`
     flex: 1;
-    border: 1px solid lightgray;
+    border: 2px solid lightgray;
     border-radius: 10px;
     padding: 20px;
-    height: 58vh;
+    height: 38vh;
     background-color: lightgray;
+    margin-top: 30px;
     ${mobile({
     flexDirection: "column",
     //    border:"1px solid blue",
@@ -210,22 +227,20 @@ const BackButton = styled.button`
 
 `;
 
-const RemoveItem = styled.button`
-    padding: 2px 8px ;
-    margin-top: 5px;
-    background-color: black;
-    color: wheat;
-    letter-spacing: 0.5px;
-`;
+// const RemoveItem = styled.button`
+//     padding: 2px 8px ;
+//     margin-top: 5px;
+//     background-color: black;
+//     color: wheat;
+//     letter-spacing: 0.5px;
+// `;
 
 const Cart = () => {
 
     const cart = useSelector((state) => state.cart);
     // console.log(cart);
-    // const {products} = useSelector((state) => state.cart)
     const [stripeToken, setStripeToken] = useState(null);
     const navigate = useNavigate();
-    // const { currentUser } = useSelector((state) => state.user);
 
     // const dispatch = useDispatch();
 
@@ -236,6 +251,7 @@ const Cart = () => {
     const onToken = (token) => {
         setStripeToken(token);
     };
+
 
 
     useEffect(() => {
@@ -263,24 +279,29 @@ const Cart = () => {
             <Navbar />
             <Announcement />
 
+
             <Wrapper>
+           
                 { cart.products.length > 0 ?
                     <>
-                        <Title>YOUR BAG</Title>
+                        <Title>YOUR CART</Title>
 
                         <Top>
+                            <Link to= '/'>
                             <TopButton>CONTINUE SHOPPING</TopButton>
-
+                            </Link>
                             <TopTexts>
-                                <TopText>Shopping Bag(2)</TopText>
+                                <TopText>Items in Cart : {cart.quantity} </TopText>
                                 {/* <TopText>Your Wishlist(0)</TopText> */}
                             </TopTexts>
-                            <TopButton type='filled'>CHECKOUT NOW</TopButton>
+                            {/* <TopButton type='filled'>CHECKOUT NOW</TopButton> */}
                         </Top>
 
                         <Bottom>
                             <Info>
                                 {cart.products.map((product) => (
+                                    <>
+                                    <ProductLink to={`/product/${product._id}`}>
                                     <Product>
                                         <ProductDetails>
                                             <Image src={product.img} />
@@ -294,17 +315,22 @@ const Cart = () => {
                                         
                                         <PriceDetails>
                                             <ProductAmountContainer>
-                                                <AddSharp />
-                                                <ProductAmount>{product.quantity}</ProductAmount>
-                                                <RemoveSharp />
+                                                {/* <AddSharp /> */}
+                                                <ProductAmount>qty: {product.quantity}</ProductAmount>
+                                                {/* <RemoveSharp /> */}
                                             </ProductAmountContainer>
                                             <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
                                             {/* <RemoveItem onClick={() => handleRemoveItem(product._id)}>Remove from Cart</RemoveItem> */}
                                         </PriceDetails>
-                                    </Product>
-                                ))}
 
-                                <Hr />
+                                        
+
+                                    </Product>
+                                    </ProductLink>
+
+                                    <Hr />
+                                    </>
+                                ))}                      
 
 
                             </Info>
@@ -362,7 +388,7 @@ const Cart = () => {
             </Wrapper>
 
             <Footer />
-
+           
         </Container>
     )
 }
