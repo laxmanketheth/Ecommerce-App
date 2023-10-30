@@ -78,7 +78,7 @@ function Slider() {
             <InfoContainer>
               <Title>Shop your style</Title>
               <Text>NOW YOU CAN SHOP YOUR FAVOURITE STYLES WITH US WITH ALMOST HALF THE PRICE.</Text>
-              <Button>shop now</Button>
+              {/* <Button>shop now</Button> */}
             </InfoContainer>
           </Slide>
         </Carousel.Item>
@@ -91,7 +91,7 @@ function Slider() {
             <InfoContainer>
               <Title>Go Bold with Fashion</Title>
               <Text>EXPLORE OUR COLLECTION OF DARING FASHION CHOICES AND SHOP CONFIDENTLY.</Text>
-              <Button>shop now</Button>
+              {/* <Button>shop now</Button> */}
             </InfoContainer>
           </Slide>
         </Carousel.Item>
@@ -104,7 +104,7 @@ function Slider() {
             <InfoContainer>
               <Title>Big Discounts <DiscountIcon style={{fontSize:'40px'}}/>  </Title>
               <Text> DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS</Text>
-              <Button>shop now</Button>
+              {/* <Button>shop now</Button> */}
             </InfoContainer>
           </Slide>
         </Carousel.Item>

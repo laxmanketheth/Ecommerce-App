@@ -1,9 +1,10 @@
 import styled from '@emotion/styled'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import mobile from '../responsive'
 import { login } from '../redux/apiCalls'
 import { useDispatch, useSelector } from 'react-redux'
 import Navbar from '../components/Navbar'
+import {loginFailure} from '../redux/userRedux';
 
 const Container = styled.div`
     height: 100vh;
@@ -12,7 +13,7 @@ const Container = styled.div`
     ${mobile({
            width: "100%"
     })}
-    `
+`;
 const Wrapper = styled.div`
     position: relative;
     display: flex;
@@ -20,7 +21,7 @@ const Wrapper = styled.div`
     align-items: center;
     /* border: 2px solid red; */
    
-`
+`;
 const Background = styled.div`
     position: absolute;
     top: 0;
@@ -41,7 +42,7 @@ const Background = styled.div`
             color:"transparent",
             backgroundColor:"#ecdfc8"
     })}
-    `
+`;
 // const Text = styled.h1``
 const FormBox = styled.div`
     /* border: 1px solid green; */
@@ -56,8 +57,7 @@ const FormBox = styled.div`
             border:"1px solid white",
             width:"80vw"
     })}
-
-    `
+ `;
 const Title = styled.h1`
     background-color: black;
     width: 100%;
@@ -65,7 +65,7 @@ const Title = styled.h1`
     text-align: center;
     padding-top: 8px;
     color: #ecdfc8;
-    `
+`;
 const Form = styled.form`
     height: 240px;
     width: 400px;
@@ -77,7 +77,7 @@ const Form = styled.form`
     padding: 10px;
     margin-top: 40px;
     /* background-color: aliceblue; */
-    `
+`;
 const Input = styled.input`
     background-color: rgb(255, 255, 255,0.8);
     outline: none;
@@ -85,7 +85,8 @@ const Input = styled.input`
     border-radius: 5px;
     height: 35px;
     padding-left: 4px;
-    `
+`;
+
 const Button = styled.button`
     background-color:black;
     color: #ecdfc8;
@@ -100,16 +101,17 @@ const Button = styled.button`
     background-color: red;
     cursor: not-allowed;
    }
-`
-const Link = styled.a`
-font-size: 13px;
-   &:hover{
-    cursor: pointer;
-   }
-`
+`;
+// const Link = styled.a`
+// font-size: 13px;
+//    &:hover{
+//     cursor: pointer;
+//    }
+// `;
+
 const Error = styled.span`
     color: red;
-`
+`;
 
 const Login = () => {
 
@@ -119,10 +121,20 @@ const Login = () => {
     const {isFetching, error,currentUser} = useSelector((state) => state.user)
     
 
-    const handleClick = (e) =>{
-        e.preventDefault()
-        login( dispatch, {username, password})
-    }
+    // useEffect(() => {
+    //     // Reset error state on component re-render
+    //     dispatch(loginFailure(false));
+    //   }, [dispatch]);
+
+    const handleClick = async (e) =>{
+        e.preventDefault();
+        try{
+            await login( dispatch, {username, password});
+
+        }catch(error){
+            // console.log(error)
+        }     
+    };
 
     return (
         <>
@@ -140,9 +152,9 @@ const Login = () => {
                         <Input placeholder='User_Name' onChange ={(e)=> setUsername(e.target.value)} />
                         <Input placeholder='Password' type='password' onChange ={(e)=> setpassword(e.target.value)}/>               
                         <Button onClick={handleClick} disabled= {isFetching} >Log In</Button>
-                        {error && <Error>Something went wrong...</Error>}
-                        <Link>Forgot Password ?</Link>
-                        <Link>Create A New Account</Link>
+                        {/* {error && <Error>Something went wrong...</Error>} */}
+                        {/* <Link>Forgot Password ?</Link> */}
+                        {/* <Link>Create A New Account</Link> */}
                     </Form>
                 </FormBox>
             </Wrapper>

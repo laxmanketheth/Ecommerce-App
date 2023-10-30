@@ -11,7 +11,7 @@ import mobile from '../responsive'
 import { useLocation, Link } from 'react-router-dom';
 import { publicRequest } from '../requestMethods';
 import { addProduct } from '../redux/cartRedux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 
 const Container = styled.div``
@@ -150,7 +150,16 @@ const Button = styled.button`
         background-color: rgb(211, 211, 211,0.3);
         border: 2px solid gray;
     }
-    `
+`;
+
+const LoginFirst = styled.div`
+    background-color: #ba2424;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+
+`;
 
 
 const Product = () => {
@@ -160,6 +169,9 @@ const Product = () => {
     const id = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
     // console.log(product);
+    const {currentUser}  = useSelector((state) => state.user);
+    // console.log(currentUser);
+
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState("");
     const [size, setSize] = useState("");
@@ -205,7 +217,7 @@ const Product = () => {
             <Announcement />
             <>
                 <Link to='/'>
-                    <ReplyAllIcon style={{marginLeft:'40px', color:'black'}}/>
+                    <ReplyAllIcon style={{ marginLeft: '40px', color: 'black' }} />
                     <TopButton>Back to Home Page</TopButton>
                 </Link>
 
@@ -220,9 +232,10 @@ const Product = () => {
                         </Text>
                         <Price>$ {product.price}</Price>
 
+
                         <FilterContainer>
                             <Filter>
-                                <FilterTitle>Color</FilterTitle>
+                                <FilterTitle>Colors </FilterTitle>
                                 {product.color && product.color.map((c) => (
                                     <FilterColor color={c} key={c} onClick={() => setColor(c)} />
                                 ))}
@@ -238,16 +251,26 @@ const Product = () => {
                             </Filter>
                         </FilterContainer>
 
-                        <AddContainer>
-                            <AmountContainer>
-                                {/* <StyledRemoveSharpIcon  onClick={()=> handleQuantity("dec")} /> */}
-                                <StyledRemoveSharpIcon onClick={decrease} />
-                                <Amount>{quantity}</Amount>
-                                {/* <StyledAddSharpIcon  onClick={()=> handleQuantity("inc")} /> */}
-                                <StyledAddSharpIcon onClick={increase} />
-                            </AmountContainer>
-                            <Button onClick={handleClick}> ADD TO CART</Button>
-                        </AddContainer>
+                        {currentUser !== null ?
+                            <>
+                                <AddContainer>
+                                    <AmountContainer>
+                                        {/* <StyledRemoveSharpIcon  onClick={()=> handleQuantity("dec")} /> */}
+                                        <StyledRemoveSharpIcon onClick={decrease} />
+                                        <Amount>{quantity}</Amount>
+                                        {/* <StyledAddSharpIcon  onClick={()=> handleQuantity("inc")} /> */}
+                                        <StyledAddSharpIcon onClick={increase} />
+                                    </AmountContainer>
+                                    <Button onClick={handleClick}> ADD TO CART</Button>
+                                </AddContainer>
+
+                            </>
+                            :
+                            <Link to='/login' style={{ textDecoration: 'none' }}>
+                                <LoginFirst>Log-in First to Add Product to Cart</LoginFirst>
+                            </Link>
+                        }
+
                     </InfoContainer>
                 </Wrapper>
             </>
