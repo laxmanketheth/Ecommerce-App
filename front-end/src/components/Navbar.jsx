@@ -150,12 +150,17 @@ const Logout = styled.span`
     margin-right: 30px;
 `;
 
+const Dashboard = styled.div`
+    margin: 0px 40px;
+    cursor: pointer;
+`;
 
 const Navbar = () => {
 
     const quantity = useSelector(state => state.cart.quantity)
     // console.log(quantity);
     const { currentUser } = useSelector((state) => state.user)
+    // console.log(currentUser);
     // const cart = useSelector((state) => state.cart)
 
     const dispatch = useDispatch();
@@ -185,13 +190,24 @@ const Navbar = () => {
                     </LogoLink>
                 </Center>
 
+
                 <Right>
+
+                    {currentUser && currentUser.isAdmin ?
+                    <>
+                    <Link to= '/dashboard' style={{textDecoration:'none', color:'#ecdfc8'}}>
+                    <Dashboard>Go to Admin Dashboard</Dashboard>
+                    </Link>
+                    </>
+                    :<></>
+                    }
+
                     {currentUser
                         ? (<>
                             <Logout onClick={handleLogout}>Logout</Logout>
                             <Link to="/cart">
                                 <Badge badgeContent={quantity} color="error">
-                                    <ShoppingCartOutlinedIcon style={{ fontSize: 20, cursor: 'pointer' }} />
+                                    <ShoppingCartOutlinedIcon style={{ fontSize: 20, cursor: 'pointer', color:'#ecdfc8' }} />
                                 </Badge>
                             </Link>
                           </>)

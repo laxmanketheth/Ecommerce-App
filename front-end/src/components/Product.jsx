@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import styled from '@emotion/styled'
 // import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+// import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+// import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import mobile from '../responsive';
 import { Link } from 'react-router-dom';
 
@@ -62,18 +62,18 @@ const Product = ({ item }) => {
     <Container>
       <Image src={item.img} />
       <Info>
-           <Icon>
+           {/* <Icon>
               <ShoppingCartOutlinedIcon />
-          </Icon>
+          </Icon> */}
           <Icon>
             <Link to={`/product/${item._id}`}> 
             {/* we are linking this to /product/:id path, where id is the id of current element  */}
               <SearchOutlinedIcon />
             </Link>
           </Icon>
-           <Icon>
+           {/* <Icon>
               <FavoriteBorderOutlinedIcon />
-          </Icon>
+          </Icon> */}
       </Info>
 
     </Container>

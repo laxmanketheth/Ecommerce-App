@@ -130,7 +130,6 @@ const Login = () => {
         e.preventDefault();
         try{
             await login( dispatch, {username, password});
-
         }catch(error){
             // console.log(error)
         }     

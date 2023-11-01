@@ -47,6 +47,8 @@ router.put("/:id",verifyTokenAndAdmin , async (req, res) =>{
 // //=========================DELETE PRODUCT======================//
 
 router.delete("/:id", verifyTokenAndAdmin, async (req,res) => {
+    // console.log("yes");
+    // console.log(req.params.id);  
     try{
         await Product.findByIdAndDelete(req.params.id)
          //findByIdAndDelete is method provided by mongodb//

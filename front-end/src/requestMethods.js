@@ -1,13 +1,18 @@
 import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/api/";
-const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzQwODc5Y2Y0NDZmNTg1YmU0M2IyOCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY5ODIxNTIwNSwiZXhwIjoxNjk4NDc0NDA1fQ.p3bufKzsbbNy-JULrb9irLUojrZhZuvn1IJWL_mScVI";
+// const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzQwODc5Y2Y0NDZmNTg1YmU0M2IyOCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY5ODIxNTIwNSwiZXhwIjoxNjk4NDc0NDA1fQ.p3bufKzsbbNy-JULrb9irLUojrZhZuvn1IJWL_mScVI";
+
+const TOKEN =  JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken;
+// console.log(
+//     JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken
+//     );
 
 export const publicRequest = axios.create({
     baseURL: BASE_URL,
-});
+});//it can be accessed without logggin in or without accessToken
 
 export const userRequest = axios.create({
     baseURL : BASE_URL,
-    header: {token:`Bearer ${TOKEN}`}
-})
+    headers: {token:`Bearer ${TOKEN}`}
+})////it can be accessed only when loggged in or with accessToken

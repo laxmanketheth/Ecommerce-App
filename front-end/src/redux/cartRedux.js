@@ -20,21 +20,9 @@ const cartSlice = createSlice({
         //     return state.products.filter(item => item.id !== action.payload._id)
         // },
 
-        // removeProduct(state, action) {
-        //     if (!state.products) {
-        //       // If products property is undefined, return the initial state
-        //       return state;
-        //     }
-          
-        //     return {
-        //       ...state,
-        //       products: state.products.filter(item => item.id !== action.payload._id)
-        //     };
-        //   },
-
         clearCart: (state) => {
             // console.log("clearCArt");
-            console.log(state.products,state.quantity);
+            // console.log(state.products,state.quantity);
             state.quantity = 0,
             state.products = [],
             state.total = 0
