@@ -74,21 +74,23 @@ router.post('/login',async (req, res) => {
         // && res.status(400).json("wrong password")
         // console.log(user.password);
 
-        const accessToken = jwt.sign({
+        const accessToken = jwt.sign({ //sign() is a function provided by the JWT library to create a new JWT. 
+                                         //The sign() function  takes two arguments: the payload and the secret key.
             id: user._id,
-            isAdmin: user.isAdmin
+            isAdmin: user.isAdmin //this is payload
         },
-        process.env.JWT_SECKEY,
+        process.env.JWT_SECKEY,  //this is secret key
         {expiresIn: "3d"}
         )
-
+        // console.log(accessToken);
         const {password, ...others} = user._doc; //destructuring the user object and returning everything except password
                                                 //in line above we are using "user._doc" because mongodb stores our document inside "_doc"
 
         //    console.log(password)  
         // console.log(others);
+        // console.log(accessToken);
           res.status(200).json({...others, accessToken})
-        // console.log(user);
+        //   console.log({...others, accessToken});
     }catch(err){
         res.status(500).json(err)
     }
