@@ -227,18 +227,21 @@ const BackButton = styled.button`
 
 `;
 
-// const RemoveItem = styled.button`
-//     padding: 2px 8px ;
-//     margin-top: 5px;
-//     background-color: black;
-//     color: wheat;
-//     letter-spacing: 0.5px;
-// `;
+const RemoveItem = styled.button`
+    padding: 2px 8px ;
+    margin-top: 5px;
+    background-color: black;
+    color: wheat;
+    letter-spacing: 0.5px;
+`;
 
 const Cart = () => {
 
     const cart = useSelector((state) => state.cart);
-    // console.log(cart);
+    console.log('hello');
+    console.log(cart);
+    console.log(cart.products);
+    console.log(cart.products.length);
     
     const [stripeToken, setStripeToken] = useState(null);
     const navigate = useNavigate();
@@ -246,7 +249,7 @@ const Cart = () => {
     // const dispatch = useDispatch();
 
     // const handleRemoveItem = (id) =>{
-    //     dispatch(removeProduct(id))
+    //     dispatch(removeProduct(_id))
     // };
 
     const onToken = (token) => {
@@ -282,7 +285,7 @@ const Cart = () => {
 
 
             <Wrapper>
-           
+          
                 { cart.products.length > 0 ?
                     <>
                         <Title>YOUR CART</Title>

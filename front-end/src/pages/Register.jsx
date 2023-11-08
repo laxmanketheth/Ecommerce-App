@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { useState } from 'react'
 import mobile from '../responsive'
 import Navbar from '../components/Navbar'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
     height: 100vh;
@@ -30,9 +31,9 @@ const Background = styled.div`
     padding: 120px;
     color: rgb(0, 0, 0,0.5);
     ${mobile({
-        color:"transparent",
-        backgroundColor: "#ecdfc8"
-    })}
+    color: "transparent",
+    backgroundColor: "#ecdfc8"
+})}
     `
 const FormBox = styled.div`
     /* border: 1px solid green; */
@@ -44,11 +45,11 @@ const FormBox = styled.div`
     align-items: center;
     flex-direction: column;
     ${mobile({
-        width:"90vw",
-        height: "480px",
-        border:"1px solid white",
-        
-    })}
+    width: "90vw",
+    height: "480px",
+    border: "1px solid white",
+
+})}
 
     `
 const Title = styled.h1`
@@ -69,8 +70,8 @@ const Form = styled.form`
     justify-content: space-between;
     padding: 10px;
     ${mobile({
-        height: "480px"     
-    })}
+    height: "480px"
+})}
     `
 const Input = styled.input`
     background-color: rgb(255, 255, 255,0.8);
@@ -80,15 +81,15 @@ const Input = styled.input`
     height: 35px;
     padding-left:4px;
     ${mobile({
-        width:"80vw",
-        height:"46px",
-    })}
+    width: "80vw",
+    height: "46px",
+})}
     `
 const Agreement = styled.span`
     text-align: center;
     ${mobile({
-        width:"80vw"
-    })}
+    width: "80vw"
+})}
     `
 const Button = styled.button`
     background-color:black;
@@ -100,37 +101,97 @@ const Button = styled.button`
    }
    font-size: 22px;
    ${mobile({
-        width:"90vw",
-        height:"60px",
-    })}
-`
+    width: "90vw",
+    height: "60px",
+})}
+`;
+
+
 
 const Register = () => {
 
+    const navigate = useNavigate();
+    const [values, setValue] = useState({
+        First_Name: '',
+        Last_Name: '',
+        username: '',
+        email: '',
+        password: ''
+    });
+
+    // const [message, setMessage] = useState("");
+
+    const handleInput = (event) => {
+        const name = event.target.name
+        const value = event.target.value
+
+        setValue({ ...values, [name]: value })
+        // console.log(values);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+
+        try {
+            await fetch('http://localhost:8080/api/auth/register', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(values)
+
+            })
+                .then(() => {
+                    // setMessage("User added successfully");
+                    // console.log("registered");
+                    navigate('/login')
+                    // console.log('user added');
+                })
+        } catch (err) {
+            console.log(err);
+        }
+
+
+    };
+
+
     return (
         <>
-        <Navbar />
-        <Container >
-            <Wrapper>
-                <Background>
-                    LUXE.
-                </Background>
+            <Navbar />
+            <Container >
+                <Wrapper>
+                    <Background>
+                        LUXE.
+                    </Background>
 
-                <FormBox>
-                    <Title>Create an Account</Title>
-                    <Form>
-                        <Input placeholder='First_Name'></Input>
-                        <Input placeholder='Last Name'></Input>
-                        <Input placeholder='User_Name'></Input>
-                        <Input placeholder='Email@'></Input>
-                        <Input placeholder='Password'></Input>
-                        <Input placeholder='Confirm_Password'></Input>
-                        <Agreement>By creating an account, I agree to all the terms and conditions.</Agreement>
-                        <Button>Create Account</Button>
-                    </Form>
-                </FormBox>
-            </Wrapper>
-        </Container>
+                    <FormBox>
+                        <Title>Create an Account</Title>
+                        <Form onSubmit={handleSubmit}>
+
+                            <Input placeholder='First_Name'
+                                onChange={handleInput} name='First_Name'
+                            ></Input>
+                            <Input placeholder='Last_Name'
+                                onChange={handleInput} name='Last_Name'
+                            ></Input>
+                            <Input placeholder='User_Name'
+                                onChange={handleInput} name='username'
+                            ></Input>
+                            <Input placeholder='Email@'
+                                onChange={handleInput} name='email'
+                            ></Input>
+                            <Input placeholder='Password'
+                                onChange={handleInput} name='password'
+                            ></Input>
+                            {/* <Input placeholder='Confirm_Password'
+                                onChange={handleInput} name='First_Name'
+                                ></Input> */}
+                            <Agreement>By creating an account, I agree to all the terms and conditions.</Agreement>
+                            {/* <Link to={'/login'}> <Button>Create Account</Button> </Link> */}
+                            <Button>Create Account</Button>
+                        </Form>
+                        {/* {message && <p>{message}</p>} */}
+                    </FormBox>
+                </Wrapper>
+            </Container>
         </>
     )
 }

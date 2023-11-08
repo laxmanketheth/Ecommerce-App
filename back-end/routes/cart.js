@@ -62,8 +62,10 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req,res) => {
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req,res) => {
     try{
         const cart =  await Cart.findOne({userId: req.params.userId})
+        
          //findByIdAndDelete is method provided by mongodb//  
         res.status(200).json(cart)
+        // console.log(cart);
 
     }catch(err){
         res.status(500).json(err);
@@ -76,7 +78,9 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req,res) => {
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
     try{
         const carts = await Cart.find();
+       
         res.status(200).json(carts);
+        // console.log(carts);
     }catch(err){
         res.status(500).json(err);
     }

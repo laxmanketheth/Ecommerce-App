@@ -33,7 +33,7 @@ const Products = ({cat, filters, sort}) => {
            cat
                ? `http://localhost:8080/api/products?category=${cat}` 
                : "http://localhost:8080/api/products"
-               );
+            );
           
           //  console.log(res);
           setProducts(res.data);  
@@ -45,7 +45,7 @@ const Products = ({cat, filters, sort}) => {
 
     useEffect(() => {
         cat && setFilteredProducts(
-          products.filter(item => 
+          products.filter((item) => 
             Object.entries(filters).every(([key,value]) =>
               item[key].includes(value)
             ))
@@ -78,6 +78,7 @@ const Products = ({cat, filters, sort}) => {
               .slice(0, 8)
               .map((item)=> <Product item = {item} key={item.id}/>)
       }
+      
     </Container>
   );
 };

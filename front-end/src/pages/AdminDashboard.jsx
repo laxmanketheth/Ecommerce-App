@@ -165,7 +165,7 @@ const AdminDashboard = () => {
                                             <TableCell>$ {item.price}</TableCell>
 
                                             <Buttons>
-                                                <Button>Edit</Button>
+                                                {/* <Button>Edit</Button> */}
                                                 <DeleteForeverIcon onClick={() => handleDelete(item._id)} style={{ fontSize: '35px', color: '#d30d0d', marginRight: '10px', cursor: 'pointer' }} />
                                             </Buttons>
 
