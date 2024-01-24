@@ -12,6 +12,7 @@ import Success from './pages/Success'
 import { useSelector } from 'react-redux'
 import AdminDashboard from './pages/AdminDashboard'
 import NewProduct from './pages/newProduct/NewProduct'
+import AboutUs from './pages/AboutUs'
 
 
 
@@ -34,6 +35,7 @@ function App() {
       <Route path='/register' element= {user ? <Navigate to= "/"/> : <Register/> }/>
       <Route path='/dashboard' element={<AdminDashboard/>}/>
       <Route path= '/newproduct' element={<NewProduct />} />
+      <Route path='/aboutUs' element={<AboutUs />} />
       
     </Routes>
 

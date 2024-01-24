@@ -4,6 +4,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import EmailIcon from '@mui/icons-material/Email';
 import mobile from '../responsive';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     height: 250px;
@@ -106,10 +107,18 @@ const Footer = () => {
         <Center>
             <Title>Useful Links</Title>
             <ListContainer>
+                <Link to= '/'>
                 <ListItems>Home</ListItems>
+                </Link>
+                <Link to= '/aboutUs'>
                 <ListItems>About us</ListItems>
+                </Link>
+                {/* <Link to='/products'>
                 <ListItems>Products</ListItems>
+                </Link> */}
+                <Link to='/cart'>
                 <ListItems>Cart</ListItems>
+                </Link>
                 <ListItems>Terms</ListItems>
             </ListContainer>
         </Center>
