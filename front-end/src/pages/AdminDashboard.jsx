@@ -78,13 +78,6 @@ const AddButton = styled.button`
     /* font-weight: bold; */
 `;
 
-// const ColorIndicator = styled.div`
-//   width: 20px;
-//   height: 20px;
-//   border-radius: 50%;
-//   background-color: ${({ color }) => color};
-// `;
-
 
 const AdminDashboard = () => {
 
@@ -92,11 +85,6 @@ const AdminDashboard = () => {
     const {currentUser} = useSelector((state) => state.user)
     //we are destructuring user and getting only currentUser from
     // it that is received to us from userRedux or userSlice using useSelector hook;
-    
-    
-    // console.log(currentUser);
-    // the above code means product.products
-    // console.log(products);
 
     const dispatch = useDispatch();
 
@@ -107,7 +95,6 @@ const AdminDashboard = () => {
     const handleDelete = (id) => {
         deleteProduct(id, dispatch)
     }
-
 
     return (
 

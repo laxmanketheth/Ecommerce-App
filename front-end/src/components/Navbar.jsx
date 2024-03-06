@@ -49,10 +49,7 @@ const Left = styled.div`
   align-items: center;
    ${mobile({ flex: 1 })}
 `
-// const Language = styled.span`
-//     font-size: 14px;
-//     cursor: pointer;
-// `
+
 const SearchContainer = styled.div`
     border: 1px solid lightgrey;
     display: flex;
@@ -129,8 +126,6 @@ const Register = styled.span`
     marginRight: "5px",
     fontSize: "13px"
 })}
-    text-decoration: none;
-
 `
 const Login = styled.span`
     font-size: 14px;
@@ -138,7 +133,7 @@ const Login = styled.span`
     margin-right: 30px;
     ${mobile({
     marginRight: "5px",
-    fontSize: "13px"
+    fontSize: "13px",
 })}
     text-decoration: none;
 `;
@@ -178,10 +173,10 @@ const Navbar = () => {
             <Wrapper>
                 <Left>
                     {/* <Language>EN</Language> */}
-                    <SearchContainer>
+                    {/* <SearchContainer>
                         <SearchBar placeholder='Search' />
                         <SearchIcon style={{ color: 'grey', fontSize: 20, cursor: 'pointer', marginLeft: '3px' }} />
-                    </SearchContainer>
+                    </SearchContainer> */}
                 </Left>
 
                 <Center>

@@ -18,49 +18,9 @@ router.post('/register', async (req, res) => {
     } catch (err) {
         res.status(500).json(err)
     }
-})
+});
 
-//LOGIN API
-
-// router.post('/login', async (req, res) => {
-//     try {
-//         const user = await User.findOne({ username: req.body.username })
-//         // console.log(user);
-//         if (!user) {
-//            return  res.json("wrong credentials")
-           
-//         }
-//         const ispasswordValid = await bcrypt.compare(req.body.password, user.password)
-//         if (!ispasswordValid) {
-//              res.send("wrong password")
-//         }
-//         // console.log(user.password);        
-//           else{  const accessToken = jwt.sign(
-//                 {
-//                 id: user._id,
-//                 isAdmin: user.isAdmin
-//                 },
-//                 process.env.JWT_SECKEY,
-//                 { expiresIn: "3d" }
-//             );
-
-//             const { password, ...others } = user._doc; //destructuring the user object and returning everything except password
-//             //in line above we are using "user._doc" because mongodb stores our document inside "_doc"
-
-//             //    console.log(password)  
-//             // console.log(others);
-//             res.status(200).json({ ...others, accessToken })
-//             }
-//         // console.log(user);
-//     } catch (err) {
-//         // console.log("error",err);
-//         res.status(500).json(err)
-//     }
-// });
-
-
-
-
+//Login API//
 router.post('/login',async (req, res) => {
     try{
         const user = await User.findOne({username: req.body.username })
@@ -71,10 +31,6 @@ router.post('/login',async (req, res) => {
       
         const ispasswordValid = await bcrypt.compare(req.body.password, user.password)     
         !ispasswordValid && res.status(400).json("wrong password")
-
-        // user.password !== req.body.password
-        // && res.status(400).json("wrong password")
-        // console.log(user.password);
 
         const accessToken = jwt.sign({ //sign() is a function provided by the JWT library to create a new JWT. 
                                          //The sign() function  takes two arguments: the payload and the secret key.
@@ -87,10 +43,7 @@ router.post('/login',async (req, res) => {
         // console.log(accessToken);
         const {password, ...others} = user._doc; //destructuring the user object and returning everything except password
                                                 //in line above we are using "user._doc" because mongodb stores our document inside "_doc"
-
-        //    console.log(password)  
-        // console.log(others);
-        // console.log(accessToken);
+                                                
           res.status(200).json({...others, accessToken})
         //   console.log({...others, accessToken});
     }catch(err){

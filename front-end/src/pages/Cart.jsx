@@ -10,7 +10,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import StripeCheckout from "react-stripe-checkout";
 import { userRequest } from '../requestMethods';
 import { useNavigate, Link } from 'react-router-dom';
-// import {removeProduct} from '../redux/cartRedux';
+import {removeProduct} from '../redux/cartRedux';
 import { current } from '@reduxjs/toolkit'
 // import Product from './Product'
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
@@ -83,11 +83,11 @@ const Info = styled.div`
     /* border: 1px solid; */
     `;
 
-const ProductLink = styled(Link)`
-  text-decoration: none ;
-  color: black;
-  /* font-weight: bold; */
-`;
+// const ProductLink = styled(Link)`
+//   text-decoration: none ;
+//   color: black;
+//   /* font-weight: bold; */
+// `;
 
 const Product = styled.div`
    display: flex;
@@ -224,7 +224,6 @@ const BackButton = styled.button`
     border: none;
     padding: 10px;
     margin-left: 30px;
-
 `;
 
 const RemoveItem = styled.button`
@@ -238,19 +237,14 @@ const RemoveItem = styled.button`
 const Cart = () => {
 
     const cart = useSelector((state) => state.cart);
-    console.log('hello');
-    console.log(cart);
-    console.log(cart.products);
-    console.log(cart.products.length);
     
     const [stripeToken, setStripeToken] = useState(null);
     const navigate = useNavigate();
 
-    // const dispatch = useDispatch();
-
-    // const handleRemoveItem = (id) =>{
-    //     dispatch(removeProduct(_id))
-    // };
+    const dispatch = useDispatch();
+    const handleRemoveItem = (id) =>{
+        dispatch(removeProduct(id))
+    };
 
     const onToken = (token) => {
         setStripeToken(token);
@@ -283,9 +277,7 @@ const Cart = () => {
             <Navbar />
             <Announcement />
 
-
             <Wrapper>
-          
                 { cart.products.length > 0 ?
                     <>
                         <Title>YOUR CART</Title>
@@ -305,13 +297,13 @@ const Cart = () => {
                             <Info>
                                 {cart.products.map((product) => (
                                     <>
-                                    <ProductLink to={`/product/${product._id}`}>
+                                    {/* <ProductLink to={`/product/${product._id}`}> */}
                                     <Product>
                                         <ProductDetails>
                                             <Image src={product.img} />
                                             <Details>
                                                 <ProductName><b>Product : </b> {product.title} </ProductName>
-                                                <ProductID><b>ID : </b> {product._id} </ProductID>
+                                                {/* <ProductID><b>ID : </b> {product._id} </ProductID> */}
                                                 <ProductColor color={product.color} />
                                                 <ProductSize><b>Size : </b> {product.size} </ProductSize>
                                             </Details>
@@ -324,18 +316,15 @@ const Cart = () => {
                                                 {/* <RemoveSharp /> */}
                                             </ProductAmountContainer>
                                             <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
-                                            {/* <RemoveItem onClick={() => handleRemoveItem(product._id)}>Remove from Cart</RemoveItem> */}
+                                            <RemoveItem onClick={() => handleRemoveItem(product._id)}>Remove from Cart</RemoveItem>
                                         </PriceDetails>
 
-                                        
-
                                     </Product>
-                                    </ProductLink>
+                                    {/* </ProductLink> */}
 
                                     <Hr />
                                     </>
                                 ))}                      
-
 
                             </Info>
                             <Summary>

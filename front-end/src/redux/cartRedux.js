@@ -13,23 +13,21 @@ const cartSlice = createSlice({
             state.quantity += 1;
             state.products.push(action.payload);
             state.total += action.payload.price * action.payload.quantity;
-        // console.log(state.products);
-        
         },
-        //  removeProduct(state, action){
-        //     // const products = 
-        // const remainingProducts = state.products.filter(item => item._id !== action.payload);
-        // state.products = remainingProducts
-        //     // console.log(products);
-        // },
-
+        
+        removeProduct: (state, action) => {
+            const product = state.products.find(item => item._id === action.payload);
+            if(product){
+                state.products = state.products.filter(item => item._id !== action.payload);
+                state.quantity -= 1;
+                state.total -= product.price * product.quantity
+            }
+        },
+    
         clearCart: (state) => {
-            // console.log("clearCArt");
-            // console.log(state.products,state.quantity);
             state.quantity = 0,
             state.products = [],
             state.total = 0
-            // console.log(state);
         },
 
     },
