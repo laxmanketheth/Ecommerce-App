@@ -133,7 +133,7 @@ const Register = () => {
         event.preventDefault()
 
         try {
-            await fetch('https://ecommerce-app-api-seven.vercel.app/api/auth/register', {
+            await fetch('https://ecommerce-app-api-seven.vercel.app/auth/register', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(values)
