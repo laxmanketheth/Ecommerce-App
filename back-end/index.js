@@ -15,7 +15,7 @@ dotenv.config();
 
 app.use(cors(
     {
-        origin: "",
+        origin: "https://ecommerce-app-api-seven.vercel.app/",
         methods: ["POST","PUT", "GET", "DELETE"],
         credentials: true
     }
