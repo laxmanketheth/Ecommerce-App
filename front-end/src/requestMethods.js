@@ -2,7 +2,7 @@ import { current } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // const BASE_URL = "http://localhost:8080/api/"
-const BASE_URL = "https://ecommerce-app-api-seven.vercel.app/"
+const BASE_URL = "https://ecommerce-app-api-seven.vercel.app/api/"
 
 // const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzQwODc5Y2Y0NDZmNTg1YmU0M2IyOCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY5ODIxNTIwNSwiZXhwIjoxNjk4NDc0NDA1fQ.p3bufKzsbbNy-JULrb9irLUojrZhZuvn1IJWL_mScVI";
 // console.log(TOKEN);
