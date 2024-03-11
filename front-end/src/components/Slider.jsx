@@ -69,11 +69,11 @@ const Button = styled.button`
 function Slider() {
   return (
     <Container>
-      <Carousel style={{width:'100%'}}>
+      <Carousel style={{width:'100%'}} interval={2000}>
         <Carousel.Item>
           <Slide>
             <ImageContainer>
-              <Image src="src/components/images/pexels-renthel-cueto-7505254.jpg" alt="First slide" />
+              <Image src="/images/pexels-renthel-cueto-7505254.jpg" alt="First slide" />
             </ImageContainer>
             <InfoContainer>
               <Title>Shop your style</Title>
@@ -86,7 +86,7 @@ function Slider() {
         <Carousel.Item>
           <Slide>
             <ImageContainer>
-              <Image src="src/components/images/pexels-natasha-cocco-12746779.jpg" alt="First slide" />
+              <Image src="/images/pexels-natasha-cocco-12746779.jpg" alt="First slide" />
             </ImageContainer>
             <InfoContainer>
               <Title>Go Bold with Fashion</Title>
@@ -99,7 +99,7 @@ function Slider() {
         <Carousel.Item>
           <Slide>
             <ImageContainer>
-              <Image src="src/components/images/pexels-godisable-jacob-914668.jpg" alt="First slide" />
+              <Image src="/images/pexels-godisable-jacob-914668.jpg" alt="First slide" />
             </ImageContainer>
             <InfoContainer>
               <Title>Big Discounts <DiscountIcon style={{fontSize:'40px'}}/>  </Title>
@@ -118,17 +118,6 @@ function Slider() {
 
 export default Slider;
 
-
-
-
-
-{/* <Carousel.Item>
-<Image src="src/components/images/pexels-natasha-cocco-12746779.jpg" alt="Second slide" />
-<Carousel.Caption>
-  <h3>Second slide label</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-</Carousel.Caption>
-</Carousel.Item> */}
 
 
 
